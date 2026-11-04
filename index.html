@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OrcaCyber Zero 1.5 | Sales Training</title>
+    <style>
+        :root {
+            --bg: #ffffff;
+            --text: #000000;
+            --muted: #666666;
+            --border: #e5e5e5;
+            --accent: #000000;
+            --hover: #333333;
+            --gray: #f7f7f7;
+            --blue: #0b5394;
+            --green: #137333;
+            --red: #a50e0e;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+        .nav {
+            position: sticky; top: 0;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            padding: 14px 24px;
+            display: flex; align-items: center; gap: 16px;
+            z-index: 100; overflow-x: auto;
+        }
+        .nav-brand { font-weight: 900; font-size: 14px; letter-spacing: -0.5px; text-transform: uppercase; margin-right: auto; white-space: nowrap; }
+        .nav a { text-decoration: none; color: var(--muted); font-weight: 600; font-size: 13px; padding: 8px 10px; border-radius: 6px; white-space: nowrap; transition: all 0.2s; }
+        .nav a:hover { color: var(--text); background: var(--gray); }
+        .container { max-width: 1000px; margin: 0 auto; padding: 40px 24px 80px; }
+        .hero { margin-bottom: 40px; }
+        .hero .badge { display: inline-block; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; border: 1px solid var(--border); border-radius: 100px; padding: 4px 12px; color: var(--muted); margin-bottom: 16px; }
+        .hero h1 { font-size: 44px; font-weight: 900; letter-spacing: -2px; line-height: 1.05; margin-bottom: 12px; }
+        .hero p { font-size: 17px; color: var(--muted); max-width: 640px; }
+        .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin-bottom: 40px; }
+        .stat { border: 1px solid var(--border); border-radius: 12px; padding: 20px; background: var(--gray); }
+        .stat .num { font-size: 28px; font-weight: 900; letter-spacing: -1px; }
+        .stat .label { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px; }
+        .card { border: 1px solid var(--border); border-radius: 12px; padding: 28px; margin-bottom: 20px; background: var(--bg); }
+        .card h2 { font-size: 22px; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 10px; }
+        .card h3 { font-size: 16px; font-weight: 700; margin: 20px 0 8px; }
+        .card p { color: var(--muted); font-size: 15px; }
+        .card ul, .card ol { margin: 8px 0 8px 20px; color: var(--muted); font-size: 15px; }
+        .card li { margin-bottom: 6px; }
+        .card li strong { color: var(--text); }
+        .card strong { color: var(--text); }
+        .pitch { border: 2px solid var(--text); border-radius: 12px; padding: 28px; margin-bottom: 20px; }
+        .pitch p { font-size: 17px; color: var(--text); }
+        .pitch .tag { display: inline-block; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; background: var(--text); color: white; border-radius: 4px; padding: 3px 8px; margin-bottom: 10px; }
+        table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 14px; }
+        th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--border); }
+        th { font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--muted); }
+        td { color: var(--text); }
+        .num-cell { font-weight: 800; }
+        code, pre { font-family: "SF Mono", Menlo, Consolas, monospace; font-size: 13px; }
+        pre { background: #111; color: #e6e6e6; border-radius: 8px; padding: 16px; overflow-x: auto; margin: 12px 0; line-height: 1.5; }
+        pre .c { color: #6b6b6b; }
+        pre .s { color: #9ecbff; }
+        pre .k { color: #ff9e9e; }
+        .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        @media (max-width: 700px) { .two-col { grid-template-columns: 1fr; } }
+        .pill { display: inline-block; font-size: 12px; font-weight: 700; border-radius: 100px; padding: 3px 10px; }
+        .pill.red { background: #fdeaea; color: var(--red); }
+        .pill.blue { background: #e8f0fe; color: var(--blue); }
+        .pill.green { background: #e6f4ea; color: var(--green); }
+        .pill.gray { background: var(--gray); color: var(--muted); }
+        .callout { border-left: 3px solid var(--text); background: var(--gray); border-radius: 0 8px 8px 0; padding: 14px 18px; margin: 14px 0; font-size: 14px; color: var(--muted); }
+        .callout strong { color: var(--text); }
+        .quiz-q { border: 1px solid var(--border); border-radius: 10px; padding: 18px; margin-bottom: 14px; }
+        .quiz-q .q { font-weight: 700; font-size: 15px; margin-bottom: 10px; }
+        .quiz-q label { display: block; font-weight: 500; font-size: 14px; text-transform: none; letter-spacing: 0; margin: 6px 0; color: var(--muted); cursor: pointer; }
+        .quiz-q label.correct { color: var(--green); font-weight: 700; }
+        .quiz-q label.wrong { color: var(--red); }
+        .btn { background: var(--text); color: white; border: none; border-radius: 8px; padding: 12px 22px; font-size: 14px; font-weight: 700; cursor: pointer; font-family: inherit; }
+        .btn:hover { background: var(--hover); }
+        .score { font-weight: 800; font-size: 18px; margin-top: 12px; }
+        .src-link { color: var(--muted); font-size: 13px; }
+        .src-link a { color: var(--text); }
+        .footer { border-top: 1px solid var(--border); margin-top: 40px; padding-top: 20px; font-size: 12px; color: var(--muted); }
+    </style>
+</head>
+<body>
+
+<div class="nav">
+    <span class="nav-brand">OrcaCyber Zero 1.5 · Sales Training</span>
+    <a href="#pitch">Pitch</a>
+    <a href="#basics">Basics</a>
+    <a href="#benchmarks">Benchmarks</a>
+    <a href="#usecases">Use cases</a>
+    <a href="#stack">Stack fit</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#access">Access &amp; gating</a>
+    <a href="#vs-ultra">Zero vs Ultra</a>
+    <a href="#icp">Who to sell to</a>
+    <a href="#objections">Objections</a>
+    <a href="#demo">Demo</a>
+    <a href="#quiz">Quiz</a>
+    <a href="#sources">Sources</a>
+</div>
+
+<div class="container">
+
+    <div class="hero">
+        <span class="badge">v1.0 · Built 2026-11-05 · For internal training</span>
+        <h1>OrcaCyber Zero 1.5<br>P0/P1 hunting, without the noise.</h1>
+        <p>Everything Fahad needs to pitch, demo and qualify OrcaCyber Zero — the model built for P0/P1 vulnerabilities and zero-days, optimized to minimize false positives. Sources at the bottom; every number here is from orcarouter.ai, live as of build date.</p>
+    </div>
+
+    <div class="stats">
+        <div class="stat"><div class="num">98%+</div><div class="label">CyberGym full eval (OrcaCyber harness)</div></div>
+        <div class="stat"><div class="num">100.0</div><div class="label">Cybench (unrestricted agent execution)</div></div>
+        <div class="stat"><div class="num">95.8</div><div class="label">CVE-Bench (evaluable subset)</div></div>
+        <div class="stat"><div class="num">1M</div><div class="label">Token context · 128K max output</div></div>
+        <div class="stat"><div class="num">$3 / $7.50</div><div class="label">Input / output per 1M tokens</div></div>
+    </div>
+
+    <div class="pitch" id="pitch">
+        <span class="tag">30-second pitch</span>
+        <p>"OrcaCyber Zero is a frontier cybersecurity model that finds the vulnerabilities that actually matter — P0/P1 issues and zero-days — while producing almost no false positives, so security teams stop wasting hours on noise. It runs on the OrcaCyber harness, does both red-team and blue-team work, and drops into the OpenAI-compatible stack you already run. Access is gated to business-verified security teams doing authorized work, so it's safe for enterprises to adopt. It's $3 per million input tokens and $7.50 output."</p>
+    </div>
+
+    <div class="card" id="basics">
+        <h2>What it is</h2>
+        <p><strong>OrcaCyber Zero 1.5</strong> (model id <code>orca/orcacyber-zero-1.5</code>, by Orca, released 2026-10-10) is the successor to OrcaCyber Zero 1.0: a frontier cybersecurity model post-trained for security research and authorized security engineering. It is built for complex, multi-step security workflows — long-context reasoning, native function calling, structured outputs.</p>
+        <ul>
+            <li><strong>Focused on P0/P1s and zero-days</strong> — deliberately tuned for the findings that demand action, not a general-purpose code model.</li>
+            <li><strong>Optimized to minimize false positives</strong> — the core differentiator. Less of a team's time goes to findings that aren't real.</li>
+            <li><strong>Runs on the OrcaCyber harness</strong> — the agentic security harness that powers CyberGym evals.</li>
+            <li><strong>Offensive and defensive capable</strong> — one model for red teams and blue teams, which is exactly why access is gated.</li>
+        </ul>
+        <div class="callout"><strong>Positioning in one line:</strong> "The model that finds real P0/P1s and zero-days — and doesn't cry wolf."</div>
+    </div>
+
+    <div class="card" id="benchmarks">
+        <h2>Benchmarks</h2>
+        <p><strong>CyberGym (98%+)</strong> is the success rate on the full eval, run with the OrcaCyber harness. Cybench, CVE-Bench, HumanEval+ and SWE-bench Pro V2 are reported by the model vendor.</p>
+        <table>
+            <tr><th>Benchmark</th><th>Score</th><th>What it measures</th></tr>
+            <tr><td>CyberGym</td><td class="num-cell">98%+</td><td>Full eval, run on the OrcaCyber harness</td></tr>
+            <tr><td>Cybench</td><td class="num-cell">100.0</td><td>Agent run with no execution limits</td></tr>
+            <tr><td>CVE-Bench</td><td class="num-cell">95.8</td><td>Evaluable subset</td></tr>
+            <tr><td>HumanEval+</td><td class="num-cell">93.9</td><td>Code generation</td></tr>
+            <tr><td>SWE-bench Pro V2</td><td class="num-cell">76.5</td><td>Real-repository software tasks</td></tr>
+        </table>
+        <div class="callout"><strong>How to use in a pitch:</strong> lead with CyberGym (our harness, our number, 98%+) and Cybench 100.0 for red-team agent runs. Never present vendor-reported numbers as if OrcaRouter ran them — say "vendor-reported."</div>
+    </div>
+
+    <div class="card" id="usecases">
+        <h2>One model for red teams and blue teams</h2>
+        <div class="two-col">
+            <div>
+                <h3><span class="pill red">Red team</span></h3>
+                <ul>
+                    <li><strong>Vulnerability research &amp; reproduction</strong> — find the flaw, then reproduce it against a target you're authorized to test.</li>
+                    <li><strong>Exploit development</strong> — build a proof of concept that shows the impact of a confirmed vulnerability in the report.</li>
+                    <li><strong>Penetration testing</strong> — drive recon, enumeration and validation across an authorized engagement, step by step.</li>
+                </ul>
+            </div>
+            <div>
+                <h3><span class="pill blue">Blue team</span></h3>
+                <ul>
+                    <li><strong>Triage without the noise</strong> — review reported issues with a model built to minimize false positives; focus on the P0s and P1s.</li>
+                    <li><strong>Security auditing</strong> — audit code and get findings back in a structured form.</li>
+                    <li><strong>Patch verification</strong> — reproduce a bug, apply the fix, and re-test it.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="card" id="stack">
+        <h2>Drops into the stack you already run</h2>
+        <p>An OpenAI-compatible API: point the SDKs, scanners, agent frameworks and CI jobs at OrcaRouter and set the model name.</p>
+        <ul>
+            <li><strong>OpenAI-compatible API</strong> — use the SDK/client you already have; just change base URL and model.</li>
+            <li><strong>Native function calling</strong> — hand it scanners, sandboxes and ticketing as tools and let it call them.</li>
+            <li><strong>Structured JSON output</strong> — findings come back as structured output your pipeline can parse.</li>
+            <li><strong>Agents and harnesses</strong> — use it as the reasoning model inside your agent framework or security harness.</li>
+        </ul>
+        <pre><span class="c"># Quickstart — Python, OpenAI SDK</span>
+<span class="k">from</span> openai <span class="k">import</span> OpenAI
+
+client = OpenAI(
+    base_url=<span class="s">"https://api.orcarouter.ai/v1"</span>,
+    api_key=<span class="s">"YOUR_ORCAROUTER_KEY"</span>,
+)
+
+resp = client.chat.completions.create(
+    model=<span class="s">"orca/orcacyber-zero-1.5"</span>,
+    tools=[],  <span class="c"># your scanner and sandbox tools</span>
+    messages=[{
+        <span class="s">"role"</span>: <span class="s">"user"</span>,
+        <span class="s">"content"</span>: <span class="s">"Audit auth for P0/P1 issues."</span>,
+    }],
+)</pre>
+    </div>
+
+    <div class="card" id="pricing">
+        <h2>Pricing (live from the routing layer)</h2>
+        <table>
+            <tr><th>Metric</th><th>OrcaCyber Zero 1.5</th><th>OrcaCyber Ultra 1.0 (for comparison)</th></tr>
+            <tr><td>Input / 1M tokens</td><td class="num-cell">$3.00</td><td>$5.00</td></tr>
+            <tr><td>Output / 1M tokens</td><td class="num-cell">$7.50</td><td>$10.00</td></tr>
+            <tr><td>Cache read / 1M</td><td class="num-cell">$0.75</td><td>—</td></tr>
+            <tr><td>Context window</td><td class="num-cell">1M tokens</td><td>1M tokens</td></tr>
+            <tr><td>Max output</td><td class="num-cell">128K tokens</td><td>—</td></tr>
+            <tr><td>p50 TTFT (7d)</td><td class="num-cell">2.97s</td><td>—</td></tr>
+            <tr><td>Output speed (7d)</td><td class="num-cell">57.1 tok/s</td><td>—</td></tr>
+            <tr><td>Error rate (7d)</td><td class="num-cell">0.43%</td><td>—</td></tr>
+            <tr><td>Data retention</td><td class="num-cell">Zero Data Retention available</td><td>—</td></tr>
+        </table>
+        <div class="callout"><strong>Talk track:</strong> "$3/M input is the same list price as Zero 1.0 — you get the 1.5 upgrade at no premium. With prompt caching, a 10M-token/month workload runs roughly $35/mo, not $43.50."</div>
+    </div>
+
+    <div class="card" id="access">
+        <h2>Access is gated — this is a feature, not a hurdle</h2>
+        <p>Both OrcaCyber models are offensive-capable, so access requires business verification, access is logged, and all use is bound by the Acceptable Use Policy (authorized work only). Until a workspace holds the Security Research tier, calls to a Cyber model return <strong>403</strong>.</p>
+        <h3>The verification ladder</h3>
+        <table>
+            <tr><th>Rung</th><th>What it proves</th><th>Unlocks</th></tr>
+            <tr><td>1 · Payment method on file</td><td>Account is chargeable; identifies nobody</td><td>No models on its own</td></tr>
+            <tr><td>2 · Identity verified</td><td>Gov ID check bound to a real person</td><td>Required, not enough</td></tr>
+            <tr><td>3 · Business verified</td><td>Registered company, proven claim to its domain, clean sanctions screen</td><td><span class="pill green">Unlocks the cyber models</span></td></tr>
+            <tr><td>4 · Contracted researcher</td><td>Named researchers, signed authorized-scope statement, contract</td><td>Caps negotiated at this rung</td></tr>
+        </table>
+        <h3>The unlock flow (orcarouter.ai/research)</h3>
+        <ol>
+            <li><strong>Work email</strong> — must be at the org's own domain; public mailboxes rejected.</li>
+            <li><strong>Passkey</strong> — each person who calls needs their own.</li>
+            <li><strong>Card</strong> — workspace admin adds one in Billing; $0 check, never charged, prepaid cards rejected.</li>
+            <li><strong>Policy + request</strong> — accept the Security AUP and request access (any member above Viewer can send it).</li>
+            <li><strong>Review</strong> — approved on the spot, or a reviewer answers within a few business days; decision emailed.</li>
+        </ol>
+        <p>Some workspaces are asked for more — an ID check, a DNS record for the company domain, an engagement, or the offensive-capability terms (owner-only to accept).</p>
+        <div class="callout"><strong>Engagements:</strong> offensive work (payload, implant, exploit development) is permitted <em>only inside a live, authorized engagement</em> — client, authorized scope, end date, your reference. The customer must be able to produce the client's written authorization on request. <strong>This is the AUP boundary; do not coach around it.</strong></div>
+        <p><strong>Who it's for:</strong> penetration testers and red teams under client authorization, security vendors and in-house security teams, and researchers studying vulnerabilities, malware or detection. The tier is granted to a <em>workspace</em>, not a person or key — every key in an approved workspace can call Cyber models. Contracted-researcher rung: <a href="mailto:providers@orcarouter.ai">providers@orcarouter.ai</a>.</p>
+    </div>
+
+    <div class="card" id="vs-ultra">
+        <h2>Zero vs Ultra — know the sibling</h2>
+        <table>
+            <tr><th></th><th>OrcaCyber Zero 1.5</th><th>OrcaCyber Ultra 1.0</th></tr>
+            <tr><td>Built for</td><td>P0/P1 vulnerabilities &amp; zero-days, minimal false positives</td><td>Security code scanning; multi-step reasoning across large codebases</td></tr>
+            <tr><td>Signature move</td><td>Low-noise hunting on the OrcaCyber harness</td><td>Native 1M-token context — scan a whole repository in one pass</td></tr>
+            <tr><td>Price in/out</td><td>$3.00 / $7.50</td><td>$5.00 / $10.00</td></tr>
+            <tr><td>Access</td><td colspan="2">Business verified, Security Research tier</td></tr>
+        </table>
+        <p>Reflex to use: <strong>whole-repo scan or deep codebase reasoning → Ultra. P0/P1 hunting, zero-day triage, exploit work, low-noise auditing → Zero.</strong> "Need to scan a whole repository in one pass? That's OrcaCyber Ultra."</p>
+    </div>
+
+    <div class="card" id="icp">
+        <h2>Who to sell to</h2>
+        <ul>
+            <li><strong>Penetration testing firms and red teams</strong> operating under client authorization.</li>
+            <li><strong>Security vendors</strong> building scanning, SAST/DAST, or agentic security products.</li>
+            <li><strong>In-house security teams</strong> (AppSec, vuln management) drowning in triage noise.</li>
+            <li><strong>Researchers</strong> working on vulnerabilities, malware, or detection.</li>
+        </ul>
+        <p><span class="pill gray">Qualification flag</span> A buyer that can't clear <strong>business verification</strong> (registered company + domain + clean sanctions screen) can't use the cyber tier. Qualify on this early — it's the fastest deal-killer to surface.</p>
+    </div>
+
+    <div class="card" id="objections">
+        <h2>Objection handling</h2>
+        <h3>"Is it safe to let an AI do offensive work?"</h3>
+        <p>Access is the answer: business verification, an Acceptable Use Policy that permits authorized work only, logged access, and offensive-capable work confined to live, authorized engagements. That's the governance layer general-purpose models don't have.</p>
+        <h3>"Why not just use GPT/Claude/a general model?"</h3>
+        <p>General models aren't post-trained for security workflows, aren't tuned to suppress false positives, and won't reliably drive scanner/sandbox tooling. Zero is: Cybench 100.0 on unrestricted agent runs, CyberGym 98%+ on the OrcaCyber harness, native function calling, structured findings, 1M-token context.</p>
+        <h3>"How do I know findings are real?"</h3>
+        <p>That's the design goal — minimal false positives, P0/P1 focus, and structured output your pipeline can verify. Fewer bogus findings means less triage time spent on noise.</p>
+        <h3>"Context / repo too big?"</h3>
+        <p>1M-token context on both models; point them at OrcaCyber Ultra for whole-repository scanning in one pass.</p>
+        <h3>"What does it cost?"</h3>
+        <p>$3.00/M input, $7.50/M output (same input price as Zero 1.0). Cache reads at $0.75/M. Zero Data Retention available for sensitive workloads.</p>
+        <h3>"How fast can we get access?"</h3>
+        <p>Verification starts at orcarouter.ai/research — work email, passkey, card, AUP, request. Often approved on the spot; worst case a reviewer answers in a few business days. Bigger enterprises wanting negotiated caps go through the contracted-researcher rung (providers@orcarouter.ai).</p>
+    </div>
+
+    <div class="card" id="demo">
+        <h2>Demo flow (10 minutes)</h2>
+        <ol>
+            <li><strong>Open with the problem:</strong> "How much of your team's week goes to false positives?"</li>
+            <li><strong>Show the model id</strong> (<code>orca/orcacyber-zero-1.5</code>) in the catalog and the 1M context.</li>
+            <li><strong>Run the quickstart</strong> — point the OpenAI SDK at <code>https://api.orcarouter.ai/v1</code> and audit a small auth codebase for "P0/P1 issues."</li>
+            <li><strong>Show the structured finding</strong> — severity, reproduction, patch verification loop.</li>
+            <li><strong>Hand it a tool</strong> (function call to a scanner) to demonstrate native tool use.</li>
+            <li><strong>Close on access:</strong> "You're business-verified — start at orcarouter.ai/research, usually same-day."</li>
+        </ol>
+        <div class="callout"><strong>Demo caution:</strong> only demo against code the customer owns or has written authorization to test. Never demo offensive work without a live, authorized engagement in place.</div>
+    </div>
+
+    <div class="card" id="quiz">
+        <h2>Check your knowledge</h2>
+        <p>Test yourself after reading. Score at the bottom.</p>
+
+        <div class="quiz-q" data-ans="1">
+            <div class="q">1. What is OrcaCyber Zero built to find?</div>
+            <label><input type="radio" name="q1" value="0"> General bugs and performance issues</label>
+            <label><input type="radio" name="q1" value="1"> P0/P1 vulnerabilities and zero-days</label>
+            <label><input type="radio" name="q1" value="0"> Phishing emails</label>
+        </div>
+
+        <div class="quiz-q" data-ans="0">
+            <div class="q">2. Which rung of the verification ladder unlocks the cyber models?</div>
+            <label><input type="radio" name="q2" value="1"> Payment method on file</label>
+            <label><input type="radio" name="q2" value="0"> Business verified</label>
+            <label><input type="radio" name="q2" value="0"> Identity verified</label>
+        </div>
+
+        <div class="quiz-q" data-ans="2">
+            <div class="q">3. What is Zero's CyberGym success rate (full eval, OrcaCyber harness)?</div>
+            <label><input type="radio" name="q3" value="0"> 76.5%</label>
+            <label><input type="radio" name="q3" value="0"> 93.9%</label>
+            <label><input type="radio" name="q3" value="1"> 98%+</label>
+        </div>
+
+        <div class="quiz-q" data-ans="0">
+            <div class="q">4. What API is OrcaCyber Zero compatible with?</div>
+            <label><input type="radio" name="q4" value="1"> Anthropic Messages</label>
+            <label><input type="radio" name="q4" value="0"> OpenAI</label>
+            <label><input type="radio" name="q4" value="0"> Proprietary OrcaAPI</label>
+        </div>
+
+        <div class="quiz-q" data-ans="1">
+            <div class="q">5. When is offensive work (exploit/payload development) permitted?</div>
+            <label><input type="radio" name="q5" value="0"> Any time the customer asks for it</label>
+            <label><input type="radio" name="q5" value="1"> Only inside a live, authorized engagement</label>
+            <label><input type="radio" name="q5" value="0"> Never</label>
+        </div>
+
+        <div class="quiz-q" data-ans="0">
+            <div class="q">6. Which model do you recommend for scanning a whole repository in one pass?</div>
+            <label><input type="radio" name="q6" value="0"> OrcaCyber Ultra</label>
+            <label><input type="radio" name="q6" value="1"> OrcaCyber Zero 1.0</label>
+            <label><input type="radio" name="q6" value="0"> GLM 5.3</label>
+        </div>
+
+        <button class="btn" onclick="gradeQuiz()">Grade me</button>
+        <div class="score" id="scoreBox"></div>
+    </div>
+
+    <div class="card" id="sources">
+        <h2>Sources (all live as of build date)</h2>
+        <p class="src-link">
+            · <a href="https://www.orcarouter.ai/orcacyber-zero">orcarouter.ai/orcacyber-zero</a><br>
+            · <a href="https://www.orcarouter.ai/models/orca/orcacyber-zero-1.5">orcarouter.ai/models/orca/orcacyber-zero-1.5</a> (pricing, benchmarks, latency)<br>
+            · <a href="https://www.orcarouter.ai/cyber">orcarouter.ai/cyber</a> (OrcaRouter Cyber, gateway controls)<br>
+            · <a href="https://docs.orcarouter.ai/getting-started/cyber-models">docs.orcarouter.ai/getting-started/cyber-models</a> (Security Research tier flow)<br>
+            · <a href="https://www.orcarouter.ai/security-aup">Acceptable Use Policy</a> · <a href="https://www.orcarouter.ai/security-offensive-terms">Offensive-capability terms</a>
+        </p>
+    </div>
+
+    <div class="footer">
+        OrcaCyber Zero 1.5 · Sales training page for OrcaRouter team · v1.0 · Built 2026-11-05 · Source: orcarouter.ai &amp; docs.orcarouter.ai — verify numbers against the live model page before customer calls.
+    </div>
+
+</div>
+
+<script>
+function gradeQuiz() {
+    var boxes = document.querySelectorAll('.quiz-q');
+    var correct = 0;
+    for (var i = 0; i < boxes.length; i++) {
+        var box = boxes[i];
+        var labels = box.querySelectorAll('label');
+        for (var j = 0; j < labels.length; j++) {
+            labels[j].classList.remove('correct', 'wrong');
+        }
+        var chosen = box.querySelector('input:checked');
+        if (chosen) {
+            var chosenLabel = chosen.parentElement;
+            if (chosen.value === '1') {
+                chosenLabel.classList.add('correct');
+                correct++;
+            } else {
+                chosenLabel.classList.add('wrong');
+                var good = box.querySelector('input[value="1"]').parentElement;
+                good.classList.add('correct');
+            }
+        } else {
+            var good = box.querySelector('input[value="1"]').parentElement;
+            good.classList.add('correct');
+        }
+    }
+    var msg = correct + ' / ' + boxes.length + ' correct';
+    if (correct === boxes.length) { msg += ' — ready to pitch.'; }
+    else if (correct >= boxes.length - 1) { msg += ' — almost there, re-read Objections.'; }
+    else { msg += ' — re-read the page, then retake.'; }
+    document.getElementById('scoreBox').textContent = msg;
+}
+</script>
+
+</body>
+</html>
